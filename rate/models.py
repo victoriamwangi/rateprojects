@@ -14,6 +14,10 @@ class Project(models.Model):
         self.save()
     def delete_project(self):
         self.delete()
+    @classmethod
+    def all_projects(cls):
+        projects = Project.objects.all()
+        return projects
     
     def __str__(self):
         return self.proj_name

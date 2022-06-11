@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import NewProject
+from .models import Project
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    projects = Project.all_projects()
+    return render(request,'home.html', {"projects": projects})
 
 def new_project(request):
     user = request.user
@@ -16,4 +18,6 @@ def new_project(request):
     else:
         form = NewProject()
     return render(request, 'post_project/new_project.html', {'form': form})
+
+
         
