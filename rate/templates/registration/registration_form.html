@@ -6,9 +6,10 @@
       {%if form.errors%}
       <p>Kindly fill in the correct details</p>
       {%endif%}
-      <form action="/accounts/register" method="post">
-        {%csrf_token%} {%bootstrap_form form%}
+      <form action="/accounts/register/" method="post">
+        {%bootstrap_form form%}
         <input type="submit" value="Sign Up" />
+         {%csrf_token%}
          <p>Already have an account?
             <a href='/accounts/login'>Login<a/>
           </p>
