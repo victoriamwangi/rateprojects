@@ -20,7 +20,7 @@
       </li>
       {%if user.is_authenticated%}
       <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="{%url 'new-project'%}">Post Project</a>
       </li>
       <li class="nav-item dropdown">
         <a
@@ -44,6 +44,9 @@
         Search
       </button>
     </form>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">Logout</a>
+    </li>
     {%else%}
     <li class="nav-item">
       <a class="nav-link" href="/accounts/login">Login</a>
