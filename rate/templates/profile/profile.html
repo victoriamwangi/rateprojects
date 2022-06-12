@@ -1,13 +1,42 @@
 {%extends 'base.html'%}{%block content%}
-<div class="container">
-  {%for project in projects%}
-  <div class="card">
-    <img class="card-img-top" src="{{project.image.url}}" alt="" />
-    <div class="card-body">
-      <h4 class="card-title">Title</h4>
-      <p class="card-text">Text</p>
+<div class="row">
+  <div class="col-lg-9">
+    <img
+      class="card-img-top"
+      style="height: 10vw; width: 10vw"
+      src="{{user.profile.prof_image.url}}"
+      alt=""
+    />
+    <p>{{user.username}}</p>
+    <p>{{user.profile.bio}}</p>
+    <p>{{user.profile.location}}</p>
+
+    <a
+      name=""
+      id=""
+      class="btn btn-primary"
+      href="{%url 'update'%}"
+      role="button"
+      >Update profile</a
+    >
+  </div>
+  <div class="col-lg-3">
+    <div class="container">
+      {%for project in projects%}
+      <div class="card">
+        <img
+          class="card-img-top"
+          src="{{user.profile.prof_image.url}}"
+          alt=""
+        />
+        <div class="card-body">
+          <h4 class="card-title">Title</h4>
+          <p class="card-text">Text</p>
+        </div>
+      </div>
+      {%endfor%}
     </div>
   </div>
-  {%endfor%}
 </div>
+
 {%endblock%}

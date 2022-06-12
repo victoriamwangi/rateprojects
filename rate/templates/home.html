@@ -1,5 +1,6 @@
 {% extends 'base.html'%} {%block content%}
-<a name="" id="hehe" class="btn btn-primary" href="#" role="button">HAH</a>
+<a name="" id="hehe" class="btn btn-primary" href="#" role="button">{{user}}</a>
+<p>{{user.email}}</p>
 
 <div class="allprojects">
   {%for project in projects%}

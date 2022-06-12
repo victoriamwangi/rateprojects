@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import NewProject
-from .models import Project
+from .forms import NewProject, UpdateProfile
+from .models import Project, Profile
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render,get_object_or_404
+
 # Create your views here.
 def home(request):
     projects = Project.all_projects()
@@ -19,10 +23,34 @@ def new_project(request):
         form = NewProject()
     return render(request, 'post_project/new_project.html', {'form': form})
 
+def get_profile(request):    
+    
+    profile = get_object_or_404(Profile,user=request.user)
+    
+    return render(request,"profile.html",{"profile":profile})
+
+
+
 def profile (request):
     user = request.user
-    projects = user.profile.projects.all() 
-    return render('profile/profile.html', {"projects": projects})
+    # projects = Profile.Project.all() 
+    return render(request, 'profile/profile.html', )
+
+@login_required(login_url='/accounts/login/')          
+def update_profile(request):
+    if request.method == 'POST':
+        form= UpdateProfile(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit= False)
+            form.instance.username.id = User.objects.get(username=request.user.id)
+            post.save()
+        return redirect('profile')
+        
+    else:
+        form = UpdateProfile()
+        return render(request, 'profile/update_profile.html', {"form": form})
+            
+
 
 
         

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {%load bootstrap5%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    {%block content%}
+
+    <div class="card-deck profdecks">
+      <div class="card">
+        <img class="card-img-top" src="holder.js/100x180/" alt="" />
+        <div class="card-body">
+          <form
+            class="updatefrm"
+            action="{%url 'profile'%}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            {%csrf_token%} {% bootstrap_form form%}
+            <input type="submit" class="btn btn-success btn-lg" value="Post" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {%endblock%}
+  </body>
+</html>
