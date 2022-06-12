@@ -21,3 +21,15 @@ class Project(models.Model):
     
     def __str__(self):
         return self.proj_name
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    prof_image = models.ImageField(upload_to = 'profiles/')
+    bio = models.CharField(max_length= 30)
+    first_name = models.CharField(max_length=40)
+    second_name = models.CharField(max_length=40)
+    location = models.CharField(max_length=40)
+    
+    def __str__(self):
+        return self.user.username
+    

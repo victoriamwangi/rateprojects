@@ -19,5 +19,10 @@ def new_project(request):
         form = NewProject()
     return render(request, 'post_project/new_project.html', {'form': form})
 
+def profile (request):
+    user = request.user
+    projects = user.profile.projects.all() 
+    return render('profile/profile.html', {"projects": projects})
+
 
         

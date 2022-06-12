@@ -1,3 +1,12 @@
 #hehe {
     background-color: yellow !important;
 }
+
+.allprojects {
+    display: flex;
+    flex-direction: row;
+}
+
+.allprojects .card {
+    width: 30vw;
+}
