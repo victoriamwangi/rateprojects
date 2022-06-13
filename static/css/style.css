@@ -49,3 +49,31 @@
     height: 70vh;
     object-fit: cover;
 }
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    margin-left: 19vw !important;
+}
+
+.profile-section img {
+    width: 6vw;
+    height: 8vw;
+    border-radius: 50%;
+}
+
+.profprojects {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #f4f7f6;
+    margin-top: 4vw;
+}
+
+.profprojects .card {
+    width: 25vw;
+    margin-left: 3vw;
+    margin: 0 auto;
+    margin-top: 3vw;
+}
