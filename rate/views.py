@@ -17,7 +17,7 @@ def new_project(request):
         form = NewProject(request.POST, request.FILES)
         if form.is_valid():
             project =form.save(commit=False)
-            project.user = user
+            project.user = user.profile
             form.save()
         return redirect('home')
     else:
@@ -34,8 +34,8 @@ def get_profile(request):
 
 def profile (request):
     user = request.user
-    # projects = user.profile.projects.all() 
-    return render(request, 'profile/profile.html', )
+    projects = user.profile.projects.all() 
+    return render(request, 'profile/profile.html',{"projects": projects} )
 # {"projects": projects}
 # def update_profile(request)
 # @login_required
