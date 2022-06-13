@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import NewProject, UpdateProfile
+from .forms import NewProject, UpdateProfile, UserUpdateForm
 from .models import Project, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render,get_object_or_404
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -33,22 +34,47 @@ def get_profile(request):
 
 def profile (request):
     user = request.user
-    # projects = Profile.Project.all() 
+    # projects = user.profile.projects.all() 
     return render(request, 'profile/profile.html', )
+# {"projects": projects}
+# def update_profile(request)
+# @login_required
+# def update(request):
+#     if request.method == "POST":
+#         updateform = UpdateProfile(request.POST, instance=request.user)
+#         p_form = ProfileUpdateForm(request.POST, request.FILES,
+#         instance=request.user.profile)
+#         if u_form.is_valid() and p_form.is_valid():
+#             u_form.save()
+#             p_form.save()
+#             messages.success(request, f'Successfully updated your account!')
+#             return redirect('profile')
+#     else:
+#         u_form = UserUpdateForm(instance=request.user)
+#         p_form = ProfileUpdateForm(instance=request.user.profile)
+#     context = {
+#         'u_form': u_form,
+#         'p_form': p_form
+#     }
+#     return render(request, 'users/update.html', context)
 
 @login_required(login_url='/accounts/login/')          
 def update_profile(request):
     if request.method == 'POST':
-        form= UpdateProfile(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit= False)
-            form.instance.username.id = User.objects.get(username=request.user.id)
-            post.save()
+        profileform= UpdateProfile(request.POST, request.FILES, instance=request.user.profile)
+        userUpdateform = UserUpdateForm(request.POST, instance=request.user)
+        
+        if profileform.is_valid() and userUpdateform.is_valid():
+            profileform()
+            userUpdateform ()
+            messages.success(request, f'Your account has been updated!')
+            userUpdateform.save()
         return redirect('profile')
         
     else:
-        form = UpdateProfile()
-        return render(request, 'profile/update_profile.html', {"form": form})
+        profileform = UpdateProfile( instance=request.user.profile)
+        userUpdateform= UserUpdateForm(instance=request.user)
+        return render(request, 'profile/update_profile.html', {"userUpdateform": userUpdateform, "profileform": profileform})
             
 
 
