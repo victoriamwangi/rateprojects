@@ -23,9 +23,11 @@
   <div class="col-lg-2"></div>
 </div>
 <div class="row">
-  <div class="col-lg-2"></div>
+  <div class="col-lg-1"></div>
 
-  <div class="col-lg-8">
+  <div class="col-lg-10 colprojs">
+    <h4 class="text-center">My Projects</h4>
+
     <div class="container profprojects">
       {%for project in projects%}
       <div class="card" id="card-proj">
@@ -33,12 +35,21 @@
         <div class="card-body">
           <h5 class="card-title">{{project.proj_name}}</h5>
           <p class="card-text">{{project.proj_description}}</p>
+          <a
+            name=""
+            id=""
+            class="btn btn-primary"
+            href="{{project.pro_url}}"
+            target="_blank"
+            role="button"
+            >View Site</a
+          >
         </div>
       </div>
       {%endfor%}
     </div>
   </div>
-  <div class="col-lg-2"></div>
+  <div class="col-lg-1"></div>
 </div>
 
 {%endblock%}
