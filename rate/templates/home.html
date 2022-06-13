@@ -1,14 +1,14 @@
 {% extends 'base.html'%} {%block content%}
-<a name="" id="hehe" class="btn btn-primary" href="#" role="button">{{user}}</a>
-<p>{{user.email}}</p>
-
+<div class="best">
+  <img class="card-img-top" src="./media/placeholder.jpg" alt="" />
+</div>
 <div class="allprojects">
   {%for project in projects%}
-  <div class="card">
+  <div class="card" id="card-proj">
     <img class="card-img-top" src="{{project.image.url}}" alt="" />
     <div class="card-body">
-      <h4 class="card-title">{{project.proj_description}}</h4>
-      <p class="card-text">{{project.proj_name}}</p>
+      <h5 class="card-title">{{project.proj_name}}</h5>
+      <p class="card-text">{{project.proj_description}}</p>
     </div>
   </div>
 
