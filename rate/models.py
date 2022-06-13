@@ -11,30 +11,14 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=40)
     location = models.CharField(max_length=40)
     
-    # @receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
-    # def save_profile(sender, instance, created, **kwargs):
-    #     user = instance
-    #     if created:
-    #         profile = Profile(user=user)
-    #         profile.save()
-    
-
-    
-    
-    # @receiver(post_save, sender=User) #add this
-	# def create_user_profile(sender, instance, created, **kwargs):
-     
-	# 	if created:
-	# 		Profile.objects.create(user=instance)
-
-	# @receiver(post_save, sender=User) #add this
-    # def save_user_profile(sender, instance, **kwargs):
-	# 	instance.profile.save()
     def save_profile(self):
         self.save()
 
     def delete_profile(self):
         self.delete()
+        
+    
+        
     def __str__(self):
         return self.user.username
 
@@ -56,7 +40,10 @@ class Project(models.Model):
     def all_projects(cls):
         projects = Project.objects.all()
         return projects
-    
+    @classmethod
+    def search_project(cls, search_term):
+        projects = cls.objects.filter(proj_name__icontains = search_term)
+        return projects    
     def __str__(self):
         return self.proj_name
     

@@ -36,27 +36,7 @@ def profile (request):
     user = request.user
     projects = user.profile.projects.all() 
     return render(request, 'profile/profile.html',{"projects": projects} )
-# {"projects": projects}
-# def update_profile(request)
-# @login_required
-# def update(request):
-#     if request.method == "POST":
-#         updateform = UpdateProfile(request.POST, instance=request.user)
-#         p_form = ProfileUpdateForm(request.POST, request.FILES,
-#         instance=request.user.profile)
-#         if u_form.is_valid() and p_form.is_valid():
-#             u_form.save()
-#             p_form.save()
-#             messages.success(request, f'Successfully updated your account!')
-#             return redirect('profile')
-#     else:
-#         u_form = UserUpdateForm(instance=request.user)
-#         p_form = ProfileUpdateForm(instance=request.user.profile)
-#     context = {
-#         'u_form': u_form,
-#         'p_form': p_form
-#     }
-#     return render(request, 'users/update.html', context)
+
 
 @login_required(login_url='/accounts/login/')          
 def update_profile(request):
@@ -76,7 +56,15 @@ def update_profile(request):
         userUpdateform= UserUpdateForm(instance=request.user)
         return render(request, 'profile/update_profile.html', {"userUpdateform": userUpdateform, "profileform": profileform})
             
-
+def search_project(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get('project')
+        searched_project = Project.search_project(search_term)
+        message = f'{search_term}'
+        return render(request, 'search.html', {"message": message, 'projects':searched_project})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {'message': message})
 
 
         
