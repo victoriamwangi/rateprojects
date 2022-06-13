@@ -33,8 +33,7 @@ def get_profile(request):
 
 
 def profile (request):
-    user = request.user
-    projects = user.profile.projects.all() 
+    projects = request.user.profile.projects.all() 
     return render(request, 'profile/profile.html',{"projects": projects} )
 
 

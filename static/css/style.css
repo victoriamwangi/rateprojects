@@ -1,5 +1,5 @@
-#hehe {
-    background-color: yellow !important;
+.navbar {
+    background-color: rgb(6, 6, 100) !important;
 }
 
 .allprojects {
@@ -7,6 +7,30 @@
     flex-direction: row;
 }
 
+.navbar-brand {
+    padding-left: 3vw;
+    color: white !important;
+}
+
 .allprojects .card {
     width: 30vw;
+}
+
+#collapsibleNavId {
+    margin-left: 20vw !important;
+}
+
+.navbar form {
+    margin-left: 8vw !important;
+}
+
+.navbar .projectbtn {
+    margin-left: 14vw !important;
+}
+
+.nav-link {
+    color: white !important;
+    padding-right: 2vw !important;
+    font-size: 1.2vw;
+    font-weight: bold !important;
 }

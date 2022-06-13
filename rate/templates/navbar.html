@@ -13,50 +13,30 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="{%url 'home'%}">Home </a>
-      </li>
       {%if user.is_authenticated%}
-      <li class="nav-item">
+
+      <form class="form-inline my-2 my-lg-0" action="{%url 'search'%}">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          name="project"
+        />
+      </form>
+      <li class="nav-item projectbtn">
         <a class="nav-link" href="{%url 'new-project'%}">Post Project</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{%url 'profile'%}">Profile</a>
       </li>
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="dropdownId"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          >Dropdown</a
-        >
-        <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <a class="dropdown-item" href="#">Action 1</a>
-          <a class="dropdown-item" href="#">Action 2</a>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
+      {%else%}
+      <li class="nav-item">
+        <a class="nav-link" href="/accounts/login">Login</a>
+      </li>
+      {%endif%}
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="{%url 'search'%}">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        name="project"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
-    <li class="nav-item">
-      <a class="nav-link" href="/logout">Logout</a>
-    </li>
-    {%else%}
-    <li class="nav-item">
-      <a class="nav-link" href="/accounts/login">Login</a>
-    </li>
-    {%endif%}
   </div>
 </nav>
