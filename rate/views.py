@@ -44,6 +44,7 @@ def profile (request):
 
 @login_required(login_url='/accounts/login/')          
 def update_profile(request):
+    
     Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         profileform= UpdateProfile(request.POST, request.FILES, instance=request.user.profile)
@@ -54,8 +55,8 @@ def update_profile(request):
             userUpdateform.save()
             messages.success(request, f'Your account has been updated!')
             
-        return redirect('profile')
-        
+        return redirect('profile',)
+
     else:
         profileform = UpdateProfile( instance=request.user.profile)
         userUpdateform= UserUpdateForm(instance=request.user)
