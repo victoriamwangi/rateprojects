@@ -11,7 +11,7 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=40)
     location = models.CharField(max_length=40)
     
-    def save(self):
+    def save_profile(self):
         self.save()
 
     def delete(self):
