@@ -32,7 +32,7 @@
     width: 40vw !important;
     margin: 0 auto;
     box-shadow: 1px 1px 5px grey;
-    height: 66vh;
+    height: 70vh;
     margin-top: 4vw;
     border-radius: 10px;
     padding-left: 5vw;
@@ -119,6 +119,21 @@
     margin-left: 3vw;
     margin: 0 auto;
     margin-top: 3vw;
+}
+
+.text-muted {
+    display: none;
+}
+
+.registerfrm {
+    height: 90vh;
+}
+
+.allbtn {
+    background-color: rgb(6, 6, 100) !important;
+    font-size: 1.4vw;
+    height: 3vw;
+    color: white;
 }
 
 

@@ -8,14 +8,14 @@
       {%endif%}
       <form class="registerfrm" action="/accounts/register/" method="post">
         {%bootstrap_form form%}
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Sign Up" class="allbtn" />
          {%csrf_token%}
          <p>Already have an account?
             <a href='/accounts/login'>Login<a/>
           </p>
       </form>
     </div>
-    <input type='hidden', name="next" value='{{next}}'
+    <input type='hidden' name="next" value='{{next}}' >
   </div>
   <div class="col-md-4"></div>
 </div>

@@ -8,13 +8,13 @@
       {%endif%}
       <form class='loginfrm' action="/accounts/login/" method="post">
         {%csrf_token%} {%bootstrap_form form%}
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" class="allbtn"/>
          <p>Already have an account?
             <a href='/accounts/register'>Sign Up<a/>
           </p>
       </form>
     </div>
-    <input type='hidden', name="next" value="{%url "home"%}"
+    <input type='hidden' name="next" value="{%url "home"%}" class= 'allbtn'>
  </div>
   <div class="col-md-4"></div>
 </div>
