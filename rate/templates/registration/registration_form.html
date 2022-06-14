@@ -6,7 +6,7 @@
       {%if form.errors%}
       <p>Kindly fill in the correct details</p>
       {%endif%}
-      <form action="/accounts/register/" method="post">
+      <form class="registerfrm" action="/accounts/register/" method="post">
         {%bootstrap_form form%}
         <input type="submit" value="Sign Up" />
          {%csrf_token%}

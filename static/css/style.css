@@ -26,6 +26,19 @@
     font-weight: bold !important;
 }
 
+.post-form,
+.loginfrm,
+.registerfrm {
+    width: 40vw !important;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px grey;
+    height: 66vh;
+    margin-top: 4vw;
+    border-radius: 10px;
+    padding-left: 5vw;
+    padding-top: 3vw;
+}
+
 
 /* HOME PAGE  */
 
