@@ -53,6 +53,13 @@
     color: rgb(6, 6, 100);
 }
 
+.post-form .btn,
+.registerfrm .btn,
+.updatefrm .btn,
+.loginfrm .btn {
+    background-color: rgb(6, 6, 100) !important;
+}
+
 
 /* HOME PAGE  */
 
