@@ -44,6 +44,7 @@ def profile (request):
 
 @login_required(login_url='/accounts/login/')          
 def update_profile(request):
+    Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         profileform= UpdateProfile(request.POST, request.FILES, instance=request.user.profile)
         userUpdateform = UserUpdateForm(request.POST, instance=request.user)
