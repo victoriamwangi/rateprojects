@@ -14,13 +14,14 @@
 
 ## Description
 
-This web site is a clone of instagram and allows user to create an account, post pictures and see posts by other people.
+This web site showcases different projects posted. It allows user to create an account, post projects and see projects by other people.
+The project has a project name, url, and the one who posted it.
 
 ## Installation
 
 On the command line type:
-git clone https://github.com/victoriamwangi/vigreisSocial.git
-cd mygallery
+git clone https://github.com/victoriamwangi/rateprojects.git
+cd rateprojects
 to open project on vs code run: code .
 
 ## Requirements
