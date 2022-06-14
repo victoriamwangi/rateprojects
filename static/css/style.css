@@ -39,6 +39,13 @@
     padding-top: 3vw;
 }
 
+.post-form input,
+.loginfrm input,
+.updatefrm input,
+.registerfrm input {
+    width: 90%;
+}
+
 
 /* HOME PAGE  */
 
