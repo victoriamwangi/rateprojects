@@ -73,9 +73,17 @@
 }
 
 .allprojects .card {
-    width: 25vw;
+    width: 28vw;
     margin-left: 3vw;
     margin: 0 auto;
+    margin-top: 3vw;
+}
+
+.allprojects .card .btn {
+    background-color: transparent;
+    border: 1px solid purple;
+    color: rgb(6, 6, 100);
+    border-radius: 10px;
 }
 
 .best img {
