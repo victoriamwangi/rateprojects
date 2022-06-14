@@ -46,6 +46,13 @@
     width: 90%;
 }
 
+.post-form label,
+.loginfrm label,
+.updatefrm label,
+.registerfrm label {
+    color: rgb(6, 6, 100);
+}
+
 
 /* HOME PAGE  */
 
