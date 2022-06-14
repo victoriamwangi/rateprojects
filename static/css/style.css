@@ -86,3 +86,27 @@
     margin: 0 auto;
     margin-top: 3vw;
 }
+
+
+/* UPDATE PROFILE  */
+
+.profdecks {}
+
+.profdecks form {
+    width: 40vw;
+    margin: 0 auto;
+    border: 1px 1px 5px grey;
+}
+
+.profdecks img {
+    width: 6vw;
+    height: 8vw;
+    border-radius: 50%;
+}
+
+.submitprof {
+    width: 100%;
+}
+
+
+/* .mb-3 {} */

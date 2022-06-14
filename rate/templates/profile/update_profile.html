@@ -6,10 +6,17 @@
   </head>
   <body>
     {%block content%}
+    <div class="profile-section">
+      <img class="card-img-top" src="{{user.profile.prof_image.url}}" alt="" />
 
+      <div class="card-body">
+        <p>{{user.username}}</p>
+        <p>{{user.profile.bio}}</p>
+        <p>{{user.profile.location}}</p>
+      </div>
+    </div>
     <div class="card-deck profdecks">
       <div class="card">
-        <img class="card-img-top" src="holder.js/100x180/" alt="" />
         <div class="card-body">
           <form
             class="updatefrm"
@@ -18,7 +25,11 @@
             enctype="multipart/form-data"
           >
             {%csrf_token%} {% bootstrap_form profileform%}
-            <input type="submit" class="btn btn-success btn-lg" value="Post" />
+            <input
+              type="submit"
+              class="btn btn-success btn-lg submitprof"
+              value="Post"
+            />
           </form>
         </div>
       </div>

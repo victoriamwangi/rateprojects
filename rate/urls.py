@@ -7,8 +7,8 @@ urlpatterns =[
     re_path('^new/project$', views.new_project, name= 'new-project'),
     re_path('^profile', views.profile, name= 'profile'),
     re_path(r'^update_profile/',views.update_profile,name = 'update'),
-    re_path('search', views.search_project, name='search')
-    
+    re_path('search', views.search_project, name='search'),
+    re_path(r'^project/(\d+)', views.project_details, name='project-details'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

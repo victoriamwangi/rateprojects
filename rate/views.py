@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import NewProject, UpdateProfile, UserUpdateForm
+from .forms import NewProject, UpdateProfile, UserUpdateForm, RateForm
 from .models import Project, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 def home(request):
@@ -44,10 +46,10 @@ def update_profile(request):
         userUpdateform = UserUpdateForm(request.POST, instance=request.user)
         
         if profileform.is_valid() and userUpdateform.is_valid():
-            profileform()
-            userUpdateform ()
-            messages.success(request, f'Your account has been updated!')
+            profileform.save()
             userUpdateform.save()
+            messages.success(request, f'Your account has been updated!')
+            
         return redirect('profile')
         
     else:
@@ -65,5 +67,9 @@ def search_project(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html', {'message': message})
 
-
-        
+def project_details(request, project_id):
+    try:
+        project = Project.objects.get(id = project_id)
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request,"post_project/project.html", {"project": project})
