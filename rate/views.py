@@ -15,6 +15,7 @@ def home(request):
     projects = Project.all_projects()
     return render(request,'home.html', {"projects": projects})
 
+@login_required(login_url='/accounts/login/')          
 def new_project(request):
     user = request.user
     if request.method =='POST':
@@ -28,14 +29,14 @@ def new_project(request):
         form = NewProject()
     return render(request, 'post_project/new_project.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')          
 def get_profile(request):    
     
     profile = get_object_or_404(Profile,user=request.user)
     
     return render(request,"profile.html",{"profile":profile})
 
-
-
+@login_required(login_url='/accounts/login/')          
 def profile (request):
     projects = request.user.profile.projects.all() 
     return render(request, 'profile/profile.html',{"projects": projects} )
@@ -69,7 +70,7 @@ def search_project(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html', {'message': message})
     
-    
+
 def project_details(request, project_id):
     try:
         project = Project.objects.get(id = project_id)
