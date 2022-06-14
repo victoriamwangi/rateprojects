@@ -1,1 +1,1 @@
-web: gunicorn vigreissocial.wsgi
+web: gunicorn rateproject.wsgi

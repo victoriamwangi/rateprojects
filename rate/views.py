@@ -76,59 +76,56 @@ def project_details(request, project_id):
     except ObjectDoesNotExist:
         raise Http404()
     return render(request,"post_project/project.html", {"project": project})
-
-def rate(request, project_id):
-    project = Project.objects.get(id = project_id)
-    rate = Rate.objects.filter(project = project)
-    ratings = Rate.objects.all()
-    rating_status = None
-    if rate:
-        rating_status = True
-    else:
-        rating_status = False
-        
-    if request.method == 'POST':
-        rform = RateForm(request.POST)
-        if rform.is_valid():
-            design = rform.cleaned_data.get('design')
-            usability = rform.cleaned_data['usability']
-            content = rform.cleaned_data['content']
-            rate = Rate()
-            rate.project = project
-            rate.user = request.user
-            rate.design = design
-            rate.usability = usability
-            rate.content = content
-            rate.average = (rate.design + rate.usability + rate.content) / 3
-            rate.save()
-            return HttpResponseRedirect(reverse('project_details', args=(project.id,)))
-        else:
-                
-            rform = RateForm()
-            params = {
-            'project': project,
-            'rform': rform,
-            'rating_status': rating_status,
-            'reviews': ratings,
-            'ratings': rate
-            }
-        return render(request, "post_project/project.html", params)
-  
-        
-   
     
 
-# def rate(request, id):
-#     project = Project.objects.get(id = id)
-#     if request.method == 'POST':
-#         rateform = RateForm(request.POST)
-#         if rateform.is_valid():
-#             rate = rateform.save(commit= False)
-#             rate.user = request.user
-#             rate.rating = request.POST["rating"]
-#             rate.project = project
-#             rate.save()
-#         return  redirect('project-details',id)
-#     else:
-#         rateform = RateForm()
-#         return render(request, "new_project/project.html", {"form": rateform})
+
+# def project_details(request, project_id):
+#     form = RateForm()
+#     project = Project.objects.get(pk=project_id)
+#     rates = Rate.get_project_rates(project.id)
+    
+#     total_rates = rates.count()
+#     rated = False
+    
+#     raters_list =[]
+#     average_list = []
+#     content_list = []
+#     design_list = []
+#     usability_list = []
+#     for rate in rates:
+#         raters_list.append(rate.reter.id)
+#         average_summation = rate.design + rate.content + rate.usability
+#         average = average_summation/3
+#         average_list.append(average)
+#         content_list.append(rate.content)
+#         design_list.append(rate.design)
+#         usability_list.append(rate.usability)
+
+#         try:
+#             user = User.objects.get(pk = request.user.id)
+#             profile = Profile.objects.get(user = user)
+#             rater = Rate.get_project_raters(profile) #here
+#             voted = False
+#             if request.user.id in raters_list: 
+#                 rated = True
+#         except Profile.DoesNotExist:
+#             rated = False    
+  
+#     average_score = 0
+#     average_design = 0
+#     average_content = 0
+#     average_usability = 0
+#     if len(average_list) > 0:
+#         average_score = sum(average_list) / len(average_list)
+#         project.average_score = average_score
+#         project.save()  
+#     if total_rates != 0:
+#         average_design = sum(design_list) / total_rates
+#         average_content = sum(content_list) / total_rates
+#         average_usability = sum(usability_list) / total_rates
+#         project.average_design = average_design
+#         project.average_content =average_content
+#         project.average_usability = average_usability
+#         project.save()    
+
+#     return render(request, 'post_project/project.html', { "form": form, "project": project, "rates": rates, "rated": rated, "total_rates":total_rates})

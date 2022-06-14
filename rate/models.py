@@ -63,8 +63,8 @@ class Rate(models.Model):
         (10, '10'),
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='irate')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name= "ratings")
     design = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
     content = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
     usability = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
@@ -73,9 +73,13 @@ class Rate(models.Model):
     
     def save(self):
         self.save()
+    # @classmethod
+    # def get_ratings(cls, id):
+    #     ratings = Rate.objects.filter(post_id=id).all()
+    #     return ratings
     @classmethod
-    def get_ratings(cls, id):
-        ratings = Rate.objects.filter(post_id=id).all()
-        return ratings
+    def get_project_rates(cls, id):
+        votes = Rate.objects.all(id)
+        return votes
     def __str__(self):
         return self.user.username
