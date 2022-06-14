@@ -1,4 +1,4 @@
-from django.urls import re_path
+from django.urls import re_path, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -9,6 +9,7 @@ urlpatterns =[
     re_path(r'^update_profile/',views.update_profile,name = 'update'),
     re_path('search', views.search_project, name='search'),
     re_path(r'^project/(\d+)', views.project_details, name='project-details'),
+    path('addreview/<int:id>/',views.rate,name="rate"),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

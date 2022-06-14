@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import NewProject, UpdateProfile, UserUpdateForm, RateForm
-from .models import Project, Profile
+from .models import Project, Profile, Rate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
+from django.db.models import Avg
 
 # Create your views here.
 def home(request):
@@ -66,10 +68,67 @@ def search_project(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html', {'message': message})
-
+    
+    
 def project_details(request, project_id):
     try:
         project = Project.objects.get(id = project_id)
     except ObjectDoesNotExist:
         raise Http404()
     return render(request,"post_project/project.html", {"project": project})
+
+def rate(request, project_id):
+    project = Project.objects.get(id = project_id)
+    rate = Rate.objects.filter(project = project)
+    ratings = Rate.objects.all()
+    rating_status = None
+    if rate:
+        rating_status = True
+    else:
+        rating_status = False
+        
+    if request.method == 'POST':
+        rform = RateForm(request.POST)
+        if rform.is_valid():
+            design = rform.cleaned_data.get('design')
+            usability = rform.cleaned_data['usability']
+            content = rform.cleaned_data['content']
+            rate = Rate()
+            rate.project = project
+            rate.user = request.user
+            rate.design = design
+            rate.usability = usability
+            rate.content = content
+            rate.average = (rate.design + rate.usability + rate.content) / 3
+            rate.save()
+            return HttpResponseRedirect(reverse('project_details', args=(project.id,)))
+        else:
+                
+            rform = RateForm()
+            params = {
+            'project': project,
+            'rform': rform,
+            'rating_status': rating_status,
+            'reviews': ratings,
+            'ratings': rate
+            }
+        return render(request, "post_project/project.html", params)
+  
+        
+   
+    
+
+# def rate(request, id):
+#     project = Project.objects.get(id = id)
+#     if request.method == 'POST':
+#         rateform = RateForm(request.POST)
+#         if rateform.is_valid():
+#             rate = rateform.save(commit= False)
+#             rate.user = request.user
+#             rate.rating = request.POST["rating"]
+#             rate.project = project
+#             rate.save()
+#         return  redirect('project-details',id)
+#     else:
+#         rateform = RateForm()
+#         return render(request, "new_project/project.html", {"form": rateform})

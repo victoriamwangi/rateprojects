@@ -1,4 +1,4 @@
-from .models import Profile, Project,Review, RATE_CHOICES
+from .models import Profile, Project,Rate
 from django import forms
 from django.contrib.auth.models import User
 
@@ -21,12 +21,9 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 class RateForm(forms.ModelForm):
-	text = forms.CharField(widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), required=False)
-	rate = forms.ChoiceField(choices=RATE_CHOICES, widget=forms.Select(), required=True)
-
-	class Meta:
-		model = Review
-		fields = ('text', 'rate')
+    class Meta: 
+        model = Rate
+        fields= ["design", "content", "usability"]
     
     
     

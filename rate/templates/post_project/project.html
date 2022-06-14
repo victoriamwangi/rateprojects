@@ -1,4 +1,4 @@
-{%extends 'base.html'%} {%block content%}
+{%extends 'base.html'%} {%load bootstrap5%}{%block content%}
 <div class="row">
   <div class="col-lg-4">
     <div class="card">
@@ -10,6 +10,69 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-8"></div>
+  <div class="col-lg-8">
+    <a
+      name=""
+      id="{%url 'rate' project.id%}"
+      class="btn btn-primary"
+      href=""
+      role="button"
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      >Rate</a
+    >
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              action="{%url 'new-project'%}"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {%csrf_token%} {%bootstrap_form rform%}
+              <input type="submit" value="Post" class="submitprof" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {%for rate in ratings%}
+      <p>{{rate.user}}</p>
+      <p>{{rate.rating}}</p>
+
+      {%endfor%}
+    </div>
+  </div>
 </div>
 {%endblock%}

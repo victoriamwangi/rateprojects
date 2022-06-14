@@ -11,10 +11,10 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=40)
     location = models.CharField(max_length=40)
     
-    def save_profile(self):
+    def save(self):
         self.save()
 
-    def delete_profile(self):
+    def delete(self):
         self.delete()
         
     
@@ -30,6 +30,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to = 'projects/')
     pro_url = models.CharField(max_length=100)
     pub_date = models.DateTimeField(auto_now_add=True)
+    averagerating=models.FloatField(default=0)
     
     
     def save_project(self):
@@ -46,24 +47,35 @@ class Project(models.Model):
         return projects    
     def __str__(self):
         return self.proj_name
-RATE_CHOICES = [
-	(1, '1'),
-	(2, '2'),
-	(3, '3'),
-	(4, '4'),
-	(5, '5'),
-	(6, '6'),
-	(7, '7'),
-	(8, '8'),
-	(9, '9'),
-	(10, '10'), 
-]
+
    
-class Review(models.Model):
+class Rate(models.Model):
+    RATE_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    text = models.TextField(max_length= 3000, blank=True)
-    rate = models.PositiveIntegerField(choices= RATE_CHOICES)
+    design = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
+    content = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
+    usability = models.IntegerField(choices=RATE_CHOICES, default=0,blank=False)
+    average = models.DecimalField(default=1, blank=False, decimal_places=2, max_digits=40)
+    pub_date = models.DateTimeField(auto_now_add =True)
     
+    def save(self):
+        self.save()
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Rate.objects.filter(post_id=id).all()
+        return ratings
     def __str__(self):
         return self.user.username
