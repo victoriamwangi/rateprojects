@@ -12,7 +12,7 @@ from django.db.models import Avg
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProfileSerializer
+from .serializer import ProfileSerializer, ProjectSerializer
 
 # Create your views here.
 def home(request):
@@ -85,7 +85,7 @@ def search_project(request):
 #     return render(request,"post_project/project.html", {"project": project})
     
 
-
+@login_required(login_url='/accounts/login/')          
 def project_details(request, project_id):
     form = RateForm()
     project = Project.objects.get(pk=project_id)
@@ -141,4 +141,9 @@ class ProfileList(APIView):
         all_profiles = Profile.objects.all()
         serializers = ProfileSerializer(all_profiles, many= True)
         return Response(serializers.data)
-        
+
+class ProjectList(APIView):
+    def get(self, request, format = None):
+        all_projects= Project.objects.all()
+        serializers = ProjectSerializer(all_projects, many= True)
+        return Response(serializers.data)
