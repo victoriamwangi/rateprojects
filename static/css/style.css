@@ -26,6 +26,10 @@
     font-weight: bold !important;
 }
 
+.nav-link:hover {
+    color: red !important;
+}
+
 .post-form,
 .loginfrm,
 .registerfrm {
@@ -77,6 +81,11 @@
     margin-left: 3vw;
     margin: 0 auto;
     margin-top: 3vw;
+}
+
+.allprojects .card:hover {
+    width: 30vw !important;
+    background-color: rgb(209, 222, 241);
 }
 
 .allprojects .card .btn {

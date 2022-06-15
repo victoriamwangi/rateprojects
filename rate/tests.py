@@ -23,12 +23,12 @@ class ProfileTest(TestCase):
         
     def test_save_method(self):
         self.vicprof.save_profile()
-        projects = Profile.objects.all()
-        self.assertTrue(len(projects) > 0)
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) > 0)
     def test_delete_method(self):
         self.vicprof.delete_profile()
-        projects = Profile.objects.all()
-        self.assertTrue(len(projects) == 0)
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) == 0)
         
     def tearDown(self):
         User.objects.all().delete()
