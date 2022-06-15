@@ -7,7 +7,7 @@
     color: white !important;
 }
 
-#collapsibleNavId {
+#navbarSupportedContent {
     margin-left: 20vw !important;
 }
 
@@ -67,6 +67,16 @@
 
 /* HOME PAGE  */
 
+.carousel-caption h5 {
+    color: red !important;
+    font-weight: bold !important;
+    font-size: 1.6vw !important;
+}
+
+.carousel-control-prev .carousel-control-next {
+    background-color: red !important;
+}
+
 .allprojects {
     display: flex;
     flex-direction: row;
@@ -81,6 +91,7 @@
     margin-left: 3vw;
     margin: 0 auto;
     margin-top: 3vw;
+    border-radius: 5px;
 }
 
 .allprojects .card:hover {
@@ -174,5 +185,57 @@
     width: 100%;
 }
 
-
-/* .mb-3 {} */
+@media (min-width: 375px) and (max-width: 912px) {
+    .allprojects {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #f4f7f6;
+        margin-top: 4vw;
+    }
+    .allprojects .card {
+        width: 90vw;
+        margin-top: 5vw;
+    }
+    .allprojects .card .btn {
+        border-radius: 16px;
+    }
+    .carousel-caption {
+        margin-top: 2vw !important;
+        text-align: center !important;
+    }
+    .carousel-caption H5 {
+        font-size: 5vw !important;
+    }
+    .carousel-caption p {
+        font-size: 4vw !important;
+    }
+    #navbarSupportedContent {
+        display: flex;
+        justify-content: center;
+    }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar .projectbtn {
+        margin-left: 10vw !important;
+    }
+    .navbar li {
+        margin-left: 10vw !important;
+        font-size: 6vw !important;
+    }
+    .navbar li a {
+        font-size: 3vw !important;
+    }
+    .navbar-brand {
+        padding-left: 40vw;
+        color: white !important;
+        font-size: 4vw;
+        color: red !important;
+    }
+    #navbarSupportedContent form input {
+        height: 5vw;
+        width: 40vw !important;
+    }
+}
