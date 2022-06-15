@@ -12,6 +12,11 @@
 - [Licence](#licence)
 - [Authors Info](#authors-info)
 
+## API ENDPOINTS
+-[Profile endpoints](https://rateitvic.herokuapp.com/api/profiles/)
+
+-[Project endpoints](https://rateitvic.herokuapp.com/api/projects/)
+
 ## Description
 
 This web site showcases different projects posted. It allows user to create an account, post projects and see projects by other people.
