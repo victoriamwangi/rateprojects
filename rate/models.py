@@ -73,13 +73,16 @@ class Rate(models.Model):
     
     def save(self):
         self.save()
-    # @classmethod
-    # def get_ratings(cls, id):
-    #     ratings = Rate.objects.filter(post_id=id).all()
-    #     return ratings
     @classmethod
-    def get_project_rates(cls, id):
-        votes = Rate.objects.all(id)
-        return votes
+    def get_ratings(cls, id):
+        ratings = Rate.objects.filter(project_id=id).all()
+        return ratings
+    # @classmethod
+    # def get_project_rates(cls, id):
+    #     votes = Rate.objects.all(id)
+    #     return votes
     def __str__(self):
-        return self.user.username
+        return f'{self.project} Rating'
+    
+# class Profiles(models.Model):
+    

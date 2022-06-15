@@ -54,6 +54,7 @@
           </div>
           <div class="modal-body">
             <form action="" method="post" enctype="form-data">
+              {%csrf_token%} {%bootstrap_form form%}
               <input type="submit" value="Post" class="submitprof" />
             </form>
           </div>

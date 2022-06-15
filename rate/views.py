@@ -10,6 +10,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.db.models import Avg
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer
+
 # Create your views here.
 def home(request):
     projects = Project.all_projects()
@@ -73,62 +77,68 @@ def search_project(request):
         return render(request, 'search.html', {'message': message})
     
 
-def project_details(request, project_id):
-    try:
-        project = Project.objects.get(id = project_id)
-    except ObjectDoesNotExist:
-        raise Http404()
-    return render(request,"post_project/project.html", {"project": project})
-    
-
-
 # def project_details(request, project_id):
-#     form = RateForm()
-#     project = Project.objects.get(pk=project_id)
-#     rates = Rate.get_project_rates(project.id)
+#     try:
+#         project = Project.objects.get(id = project_id)
+#     except ObjectDoesNotExist:
+#         raise Http404()
+#     return render(request,"post_project/project.html", {"project": project})
     
-#     total_rates = rates.count()
-#     rated = False
-    
-#     raters_list =[]
-#     average_list = []
-#     content_list = []
-#     design_list = []
-#     usability_list = []
-#     for rate in rates:
-#         raters_list.append(rate.reter.id)
-#         average_summation = rate.design + rate.content + rate.usability
-#         average = average_summation/3
-#         average_list.append(average)
-#         content_list.append(rate.content)
-#         design_list.append(rate.design)
-#         usability_list.append(rate.usability)
 
-#         try:
-#             user = User.objects.get(pk = request.user.id)
-#             profile = Profile.objects.get(user = user)
-#             rater = Rate.get_project_raters(profile) #here
-#             voted = False
-#             if request.user.id in raters_list: 
-#                 rated = True
-#         except Profile.DoesNotExist:
-#             rated = False    
+
+def project_details(request, project_id):
+    form = RateForm()
+    project = Project.objects.get(pk=project_id)
+    rates = Rate.get_ratings(project.id)  
+    total_rates = rates.count()
+    rated = False
+    
+    raters_list =[]
+    average_list = []
+    content_list = []
+    design_list = []
+    usability_list = []
+    for rate in rates:
+        raters_list.append(rate.rater.id)
+        average_summation = rate.design + rate.content + rate.usability
+        average = average_summation/3
+        average_list.append(average)
+        content_list.append(rate.content)
+        design_list.append(rate.design)
+        usability_list.append(rate.usability)
+
+        try:
+            user = User.objects.get(pk = request.user.id)
+            profile = Profile.objects.get(user = user)
+            rater = Rate.get_project_raters(profile) #here
+            voted = False
+            if request.user.id in raters_list: 
+                rated = True
+        except Profile.DoesNotExist:
+            rated = False    
   
-#     average_score = 0
-#     average_design = 0
-#     average_content = 0
-#     average_usability = 0
-#     if len(average_list) > 0:
-#         average_score = sum(average_list) / len(average_list)
-#         project.average_score = average_score
-#         project.save()  
-#     if total_rates != 0:
-#         average_design = sum(design_list) / total_rates
-#         average_content = sum(content_list) / total_rates
-#         average_usability = sum(usability_list) / total_rates
-#         project.average_design = average_design
-#         project.average_content =average_content
-#         project.average_usability = average_usability
-#         project.save()    
+    average_score = 0
+    average_design = 0
+    average_content = 0
+    average_usability = 0
+    if len(average_list) > 0:
+        average_score = sum(average_list) / len(average_list)
+        project.average_score = average_score
+        project.save()  
+    if total_rates != 0:
+        average_design = sum(design_list) / total_rates
+        average_content = sum(content_list) / total_rates
+        average_usability = sum(usability_list) / total_rates
+        project.average_design = average_design
+        project.average_content =average_content
+        project.average_usability = average_usability
+        project.save()    
 
-#     return render(request, 'post_project/project.html', { "form": form, "project": project, "rates": rates, "rated": rated, "total_rates":total_rates})
+    return render(request, 'post_project/project.html', { "form": form, "project": project, "rates": rates, "rated": rated, "total_rates":total_rates})
+
+class ProfileList(APIView):
+    def get(self, request, format = None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many= True)
+        return Response(serializers.data)
+        

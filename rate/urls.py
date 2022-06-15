@@ -10,6 +10,7 @@ urlpatterns =[
     re_path('search', views.search_project, name='search'),
     path('project/<int:project_id>)', views.project_details, name='project-details'),
     # path('addreview/<int:id>/',views.rate,name="rate"),
+    re_path(r'^api/profiles/$', views.ProfileList.as_view() )
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
